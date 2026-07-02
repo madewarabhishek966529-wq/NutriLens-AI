@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-app: theme("colors.mint.100");
+  --bg-surface: rgba(255, 255, 255, 0.6);
+  --border-surface: rgba(255, 255, 255, 0.4);
+}
+
+.dark {
+  --bg-app: #0B1712;
+  --bg-surface: rgba(20, 32, 25, 0.55);
+  --border-surface: rgba(255, 255, 255, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: theme("colors.ink.900");
+  font-family: theme("fontFamily.sans");
+  transition: background-color 0.3s ease;
+}
+
+.dark body {
+  color: #EAF3EE;
+}
+
+@layer components {
+  .glass-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    @apply rounded-xl2 shadow-glass dark:shadow-glass-dark;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-grad-forest px-6 py-3
+      font-semibold text-white transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-pine-600/30
+      bg-white/50 dark:bg-white/5 px-6 py-3 font-semibold text-pine-700 dark:text-pine-100
+      transition-colors hover:bg-white/80 dark:hover:bg-white/10;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl2 border border-pine-900/10 dark:border-white/10 bg-white/70 dark:bg-white/5
+      px-4 py-3 text-ink-900 dark:text-white placeholder:text-ink-500 focus:outline-none
+      focus:ring-2 focus:ring-pine-500/50 transition;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-pine-100/60 dark:bg-white/5 rounded-xl2;
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 1.8s infinite linear;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: theme("colors.pine.300");
+  border-radius: 999px;
+}
